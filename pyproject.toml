@@ -1,0 +1,7 @@
+[project]
+name = "learn-aiogram3"
+version = "0.1.0"
+description = "Learn aiogram3"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
