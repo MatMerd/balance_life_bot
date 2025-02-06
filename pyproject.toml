@@ -1,0 +1,113 @@
+[project]
+name = "balance_life_bot"
+version = "0.1.0"
+description = "Bot for planing life, budget management, sports, meditation etc."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiogram>=3.17.0",
+    "aiohttp>=3.11.11",
+    "aiosqlite>=0.20.0",
+    "alembic>=1.14.1",
+    "litestar>=2.14.0",
+    "modern-di>=0.11.0",
+    "pydantic-settings>=2.7.1",
+    "sqlalchemy>=2.0.37",
+]
+
+[dependency-groups]
+dev = [
+    "mypy==1.13.0",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.2",
+    "pytest-randomly>=3.16.0",
+    "ruff>=0.9.1",
+]
+
+[tool.mypy]
+python_version = "3.12"
+pretty = true
+disable_error_code = ['import-untyped']
+plugins = ['pydantic.mypy']
+strict = true
+
+[tool.ruff]
+# Allow lines to be as long as 120.
+line-length = 120
+
+target-version = "py312"
+# In addition to the standard set of exclusions, omit all tests, plus a specific file.
+extend-exclude = [
+    ".eggs",
+    "git",
+    ".hg",
+    ".idea",
+    ".mypy_cache",
+    ".nox",
+    "tox",
+    ".venv",
+    ".svn",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "versions",
+    "venv",
+    "git",
+]
+
+# Enable fix behavior by-default when running ruff
+# fix = true
+
+# A list of rule codes or prefixes to enable. I001 is for isort
+# extend-select = ["I001"]
+lint.select = ["ALL"]
+lint.ignore = [
+    "RUF001",
+    "D1",
+    "D203",
+    "D213",
+    "FA102",
+    "E203",
+    "E721",
+    "Q000",
+    "G004",
+    "ANN204",
+    "TD",
+    "SIM117",
+    "B008",
+    "COM812",
+    "ISC001",
+]
+cache-dir = "/tmp/ruff-cache/"
+
+[tool.ruff.lint.extend-per-file-ignores]
+# Also ignore `F401` in all `__init__.py` files.
+"__init__.py" = ["F401"]
+"tests/*.py" = ["ANN401", "S101", "S311"]
+
+[tool.ruff.format]
+# Prefer single quotes over double quotes
+quote-style = "single"
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+# В связке с combine-as-imports = true
+force-wrap-aliases = true
+known-first-party = ["tests"]
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+split-on-trailing-comma = true
+lines-after-imports = 2
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+addopts = "--basetemp=/tmp/pytest"
